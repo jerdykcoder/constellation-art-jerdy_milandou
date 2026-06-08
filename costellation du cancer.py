@@ -1,49 +1,51 @@
 import turtle
-import random
 
-# Fenêtre
-screen = turtle.Screen()
-screen.bgcolor("black")
-screen.title("Constellation du Cancer")
+# Configuration de la fenêtre
+ecran = turtle.Screen()
+ecran.title("Constellation du Cancer")
+ecran.bgcolor("black")
 
-# Tortue
-etoile = turtle.Turtle()
-etoile.hideturtle()
-etoile.speed(0)
+# Création de la tortue
+t = turtle.Turtle()
+t.speed(0)
+t.hideturtle()
 
-# Etoiles principales de la constellation
-cancer = [
-    (-160,-30),   # Altarf
-    (-120,40),    # Asellus Borealis
-    (-90,10),     # Asellus Australis
-    (-40,0),      # Acubens
-    (0,60),       # Iota Cancri
-    (40,40),      # Chi Cancri
-    (100,20),     # Xi Cancri
-]
+# Coordonnées des étoiles
+etoiles = {
+    "Altarf": (-120, -80),
+    "Asellus Borealis": (-40, 60),
+    "Asellus Australis": (-20, 10),
+    "Acubens": (80, -40),
+    "Tegmine": (120, 50),
+    "Lambda Cancri": (40, 100)
+}
 
 # Dessiner les étoiles
-etoile.color("white")
-
-for x,y in cancer:
-    etoile.penup()
-    etoile.goto(x,y)
-    etoile.dot(random.randint(8,15))
+for x, y in etoiles.values():
+    t.penup()
+    t.goto(x, y)
+    t.dot(15, "yellow")
 
 # Relier les étoiles
-etoile.penup()
-etoile.goto(cancer[0])
-etoile.pendown()
+t.color("white")
+t.pensize(2)
 
-for x,y in cancer[1:]:
-    etoile.goto(x,y)
+liaisons = [
+    ("Altarf", "Asellus Australis"),
+    ("Asellus Australis", "Asellus Borealis"),
+    ("Asellus Borealis", "Lambda Cancri"),
+    ("Lambda Cancri", "Tegmine"),
+    ("Tegmine", "Acubens")
+]
 
-# Dessiner l'amas de la Ruche (Praesepe)
-for i in range(30):
-    x = random.randint(-20,20)
-    y = random.randint(-20,20)
-    etoile.penup()
-    etoile.goto(x,y)
-    etoile.dot(4)
+for debut, fin in liaisons:
+    x1, y1 = etoiles[debut]
+    x2, y2 = etoiles[fin]
 
+    t.penup()
+    t.goto(x1, y1)
+    t.pendown()
+    t.goto(x2, y2)
+
+# Maintenir la fenêtre ouverte
 turtle.done()
