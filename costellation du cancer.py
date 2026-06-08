@@ -24,10 +24,10 @@ etoiles = {
 for x, y in etoiles.values():
     t.penup()
     t.goto(x, y)
-    t.dot(15, "yellow")
+    t.dot(15, "gold")
 
 # Relier les étoiles
-t.color("white")
+t.color("purple")
 t.pensize(2)
 
 liaisons = [
